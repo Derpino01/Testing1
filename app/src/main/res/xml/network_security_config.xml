@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">192.168.254.100</domain>
+        <domain includeSubdomains="true">192.168.0.104</domain><!-- Your specific local IP -->
+        <!-- You could add other <domain> tags here if needed -->
+    </domain-config>
+    <!-- You can add base-config or other domain-configs for HTTPS here if needed -->
+</network-security-config>
