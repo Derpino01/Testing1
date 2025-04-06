@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center_horizontal"
+    tools:context=".AddMedicineActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Medicine"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"/>
+
+    <EditText
+        android:id="@+id/editTextMedicineName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Medicine Name"
+        android:inputType="textCapWords"
+        android:maxLines="1"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/editTextMedicineAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:hint="Amount (e.g., 10mg, 1 tablet)"
+        android:inputType="text"
+        android:maxLines="1"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/buttonSaveMedicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Medicine"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/buttonSeeDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="See Display"
+        android:textSize="18sp"/>
+
+</LinearLayout>

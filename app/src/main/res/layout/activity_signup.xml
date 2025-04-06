@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center"
+    tools:context=".SignupActivity">
+
+    <!-- Sign Up Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="40dp"/>
+
+    <!-- Username Input -->
+    <EditText
+        android:id="@+id/editTextSignupUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="text"
+        android:maxLines="1"
+        android:minHeight="48dp" />
+
+    <!-- Create Password Input -->
+    <EditText
+        android:id="@+id/editTextSignupPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Create Password"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:minHeight="48dp" />
+
+    <!-- Confirm Password Input -->
+    <EditText
+        android:id="@+id/editTextSignupConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:minHeight="48dp" />
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/buttonSignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Link to Login Screen -->
+    <TextView
+        android:id="@+id/textViewGoToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:text="Already have an account? Login"
+        android:textColor="?android:attr/textColorLink" />
+
+</LinearLayout>
