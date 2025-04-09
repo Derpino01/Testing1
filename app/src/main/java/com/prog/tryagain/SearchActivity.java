@@ -2,6 +2,7 @@ package com.prog.tryagain;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -92,6 +93,34 @@ public class SearchActivity extends AppCompatActivity {
             String selectedDisplayString = displayList.get(position);
             // You might want to find the original Medicine object if you need more data
             // This requires iterating through allMedicinesList or using a custom adapter
+
+            Medicine selectedMedicine = null;
+            for (Medicine med : allMedicinesList) {
+                String medDisplayString = med.getName() + (!med.getAmount().isEmpty() ? " (" + med.getAmount() + ")" : "");
+                // OR a more robust way if using toString() in Medicine class:
+                // String medDisplayString = med.toString();
+                if (medDisplayString.equals(selectedDisplayString)) {
+                    selectedMedicine = med;
+                    break;
+                }
+            }
+
+            if (selectedMedicine != null) {
+                // Create an Intent to start ShowMedInfo Activity
+                Intent intent = new Intent(SearchActivity.this, ShowMedInfo.class);
+
+                // Put the medicine data as extras
+                intent.putExtra(ShowMedInfo.EXTRA_MED_ID, selectedMedicine.getId());
+                intent.putExtra(ShowMedInfo.EXTRA_MED_NAME, selectedMedicine.getName());
+                intent.putExtra(ShowMedInfo.EXTRA_MED_AMOUNT, selectedMedicine.getAmount());
+
+                // Start the activity
+                startActivity(intent);
+
+            } else {
+                Toast.makeText(SearchActivity.this, "Could not find medicine data.", Toast.LENGTH_SHORT).show();
+            }
+
             Toast.makeText(SearchActivity.this, "Selected: " + selectedDisplayString, Toast.LENGTH_SHORT).show();
         });
 

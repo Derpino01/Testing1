@@ -14,6 +14,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity android:name=".SearchActivity" android:exported="false" />
+        <activity
+            android:name=".ShowMedInfo"
+            android:label="Medicine Information" />
         <activity android:name=".SignupActivity" android:exported="false" />
         <activity android:name=".AddMedicineActivity" android:exported="false" />
         <activity android:name=".DisplayMedicineActivity" android:exported="false" />
