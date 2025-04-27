@@ -30,7 +30,7 @@ public class AddMedicineActivity extends AppCompatActivity {
     Button buttonSaveMedicine, buttonSeeMedicine;
 
     // !! REPLACE 'YOUR_COMPUTER_IP' with your actual WAMP server IP !!
-    private static final String ADD_MED_URL = "http://192.168.254.111/android_api/add_medicine.php";
+    private static final String ADD_MED_URL = "http://192.168.0.115/android_api/add_medicine.php";
     private static final String TAG = "AddMedicineActivity";
 
     @Override

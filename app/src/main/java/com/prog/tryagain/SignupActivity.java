@@ -2,7 +2,6 @@ package com.prog.tryagain;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log; // For logging
@@ -35,7 +34,7 @@ public class SignupActivity extends AppCompatActivity {
 
     // Define the URL of your PHP script
     // !! REPLACE 'YOUR_COMPUTER_IP' with the actual IP address found in Step 3.4 !!
-    private static final String SIGNUP_URL = "http://192.168.254.111/android_api/signup.php";
+    private static final String SIGNUP_URL = "http://192.168.0.115/android_api/signup.php";
     private static final String TAG = "SignupActivity"; // For Logcat192.168.0.106
 
     @Override
@@ -54,6 +53,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Call the validation and registration method
                 validateAndRegisterUser();
+
             }
         });
 
@@ -112,6 +112,8 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(this, "Attempting registration...", Toast.LENGTH_SHORT).show();
 
             registerUser(username, password);
+
+
         }
     }
 
@@ -179,7 +181,12 @@ public class SignupActivity extends AppCompatActivity {
             }
         };
 
+
+
+
+
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+
     }
 }

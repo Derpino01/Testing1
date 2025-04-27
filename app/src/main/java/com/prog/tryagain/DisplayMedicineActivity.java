@@ -31,7 +31,7 @@ public class DisplayMedicineActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
 
     // !! REPLACE 'YOUR_COMPUTER_IP' with your actual WAMP server IP !!
-    private static final String GET_MEDS_URL = "http://192.168.254.111/android_api/get_medicine.php";
+    private static final String GET_MEDS_URL = "http://192.168.0.115/android_api/get_medicine.php";
     private static final String TAG = "DisplayMedicineActivity";
 
     @Override

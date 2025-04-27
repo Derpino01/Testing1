@@ -33,7 +33,7 @@ public class ShowMedInfo extends AppCompatActivity {
     public static final String EXTRA_MED_AMOUNT = "com.prog.tryagain.extra.MED_AMOUNT";
 
     // !! IMPORTANT: Replace with your actual WAMP server IP and script path !!
-    private static final String DELETE_MED_URL = "http://192.168.0.106/android_api/delete_medicine.php";
+    private static final String DELETE_MED_URL = "http://192.168.0.115/android_api/delete_medicine.php";
     private static final String TAG = "ShowMedInfo";
 
     TextView textViewId;
