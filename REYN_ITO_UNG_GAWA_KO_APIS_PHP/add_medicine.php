@@ -1,0 +1,112 @@
+<?php
+header("Content-Type: application/json");
+
+// --- Database Configuration ---
+$db_host = "localhost";
+$db_user = "root";
+$db_pass = ""; // Your WAMP MySQL password (if any)
+$db_name = "android_auth"; // Your database name
+
+$response = array('error' => false, 'message' => '');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // --- Retrieve POST data for the new table structure ---
+    // Mandatory fields (adjust as needed based on your DB constraints)
+    $brand_name = isset($_POST['brand_name']) ? trim($_POST['brand_name']) : '';
+    $generic_name = isset($_POST['generic_name']) ? trim($_POST['generic_name']) : '';
+    $price_str = isset($_POST['price']) ? trim($_POST['price']) : ''; // Price as string from POST
+
+    // Optional fields (can be NULL or have defaults in DB)
+    $category_id_str = isset($_POST['category_id']) ? trim($_POST['category_id']) : '';
+    $regulation_id_str = isset($_POST['regulation_id']) ? trim($_POST['regulation_id']) : '';
+    $description = isset($_POST['description']) ? trim($_POST['description']) : null; // Allow empty to be NULL
+
+    // --- Basic Validation ---
+    if (empty($brand_name)) {
+        $response['error'] = true;
+        $response['message'] = "Brand Name cannot be empty.";
+    } elseif (empty($generic_name)) {
+        $response['error'] = true;
+        $response['message'] = "Generic Name cannot be empty.";
+    } elseif ($price_str === '' || !is_numeric($price_str)) { // Price is mandatory and must be numeric
+        $response['error'] = true;
+        $response['message'] = "Price cannot be empty and must be a valid number.";
+    } else {
+        // Convert and prepare values for DB
+        $price = (double)$price_str;
+        $category_id = null;
+        $regulation_id = null;
+
+        // Validate and convert CategoryID if provided
+        if ($category_id_str !== '') {
+            if (is_numeric($category_id_str)) {
+                $category_id = (int)$category_id_str;
+            } else {
+                $response['error'] = true;
+                $response['message'] = "CategoryID must be a valid number or empty.";
+            }
+        }
+
+        // Validate and convert RegulationID if provided (only if no previous error)
+        if (!$response['error'] && $regulation_id_str !== '') {
+            if (is_numeric($regulation_id_str)) {
+                $regulation_id = (int)$regulation_id_str;
+            } else {
+                $response['error'] = true;
+                $response['message'] = "RegulationID must be a valid number or empty.";
+            }
+        }
+
+        // Proceed only if there are no validation errors
+        if (!$response['error']) {
+            $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+            if ($conn->connect_error) {
+                $response['error'] = true;
+                $response['message'] = "Database Connection Failed: " . $conn->connect_error;
+            } else {
+                // Prepare INSERT statement
+                // Column order: Brand_Name, Generic_Name, CategoryID, RegulationID, Price, Description
+                $stmt = $conn->prepare("INSERT INTO tbl_Medicine (Brand_Name, Generic_Name, CategoryID, RegulationID, Price, Description) VALUES (?, ?, ?, ?, ?, ?)");
+
+                if ($stmt === false) {
+                     $response['error'] = true;
+                     $response['message'] = "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+                } else {
+                    // Bind parameters:
+                    // s = string
+                    // i = integer
+                    // d = double
+                    // b = blob (not used here)
+                    // Types: Brand_Name (s), Generic_Name (s), CategoryID (i), RegulationID (i), Price (d), Description (s)
+                    $stmt->bind_param("ssiids",
+                        $brand_name,
+                        $generic_name,
+                        $category_id,    // This will be NULL if not provided or invalid
+                        $regulation_id,  // This will be NULL if not provided or invalid
+                        $price,
+                        $description     // This will be NULL if not provided
+                    );
+
+                    if ($stmt->execute()) {
+                        $response['error'] = false;
+                        $response['message'] = "Medicine added successfully!";
+                        // $response['inserted_id'] = $stmt->insert_id; // If you need the ID of the inserted row
+                    } else {
+                        $response['error'] = true;
+                        $response['message'] = "Failed to add medicine: " . $stmt->error;
+                    }
+                    $stmt->close();
+                }
+                $conn->close();
+            }
+        }
+    }
+} else {
+    $response['error'] = true;
+    $response['message'] = "Invalid Request Method. Only POST is accepted.";
+}
+
+echo json_encode($response);
+?>
